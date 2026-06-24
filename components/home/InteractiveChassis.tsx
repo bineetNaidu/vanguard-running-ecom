@@ -8,6 +8,7 @@ import Image from 'next/image';
 export default function InteractiveChassis() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [imgError, setImgError] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   
   // Raw mouse coordinates normalized from -1 to 1
   const rawX = useMotionValue(0);
@@ -25,22 +26,44 @@ export default function InteractiveChassis() {
   const translateY = useTransform(smoothY, [-1, 1], [-20, 20]);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!containerRef.current) return;
-      const { left, top, width, height } = containerRef.current.getBoundingClientRect();
-      
-      // Calculate cursor position relative to the center of the container
-      const center_x = left + width / 2;
-      const center_y = top + height / 2;
-      
-      // Normalize to a -1 to 1 scale
-      rawX.set((e.clientX - center_x) / (width / 2));
-      rawY.set((e.clientY - center_y) / (height / 2));
+    // Detect touch capability to safely isolate event handling
+    const checkTouch = () => {
+      setIsTouchDevice(
+        'ontouchstart' in window || 
+        navigator.maxTouchPoints > 0
+      );
     };
+    
+    checkTouch();
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [rawX, rawY]);
+    if (isTouchDevice) {
+      // Mobile Fallback: Create a lightweight programmatic ambient loop
+      // instead of binding heavy scroll or touch listeners
+      let angle = 0;
+      const interval = setInterval(() => {
+        angle += 0.02;
+        rawX.set(Math.sin(angle) * 0.3);
+        rawY.set(Math.cos(angle * 1.5) * 0.2);
+      }, 16); // ~60fps lightweight update tick
+      
+      return () => clearInterval(interval);
+    } else {
+      // Desktop Configuration: Track cursor coordinate fields
+      const handleMouseMove = (e: MouseEvent) => {
+        if (!containerRef.current) return;
+        const { left, top, width, height } = containerRef.current.getBoundingClientRect();
+        
+        const center_x = left + width / 2;
+        const center_y = top + height / 2;
+        
+        rawX.set((e.clientX - center_x) / (width / 2));
+        rawY.set((e.clientY - center_y) / (height / 2));
+      };
+
+      window.addEventListener('mousemove', handleMouseMove);
+      return () => window.removeEventListener('mousemove', handleMouseMove);
+    }
+  }, [rawX, rawY, isTouchDevice]);
 
   return (
     <div ref={containerRef} className="absolute inset-0 z-0 flex items-center justify-center overflow-hidden">

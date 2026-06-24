@@ -9,6 +9,7 @@ import { products } from '@/data/products';
 export default function ProductFeatureStage() {
   const stageRef = useRef<HTMLDivElement>(null);
   const [imgError, setImgError] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   // Isolate target product data
   const targetProduct = products.find(p => p.slug === 'vxr-04-velocity-elite') || products[3];
@@ -31,29 +32,40 @@ export default function ProductFeatureStage() {
   const textY = useTransform(smoothY, [-1, 1], [15, -15]);
 
   useEffect(() => {
-    const handleMove = (e: MouseEvent) => {
-      if (!stageRef.current) return;
-      const { left, top, width, height } = stageRef.current.getBoundingClientRect();
-      const currentX = (e.clientX - (left + width / 2)) / (width / 2);
-      const currentY = (e.clientY - (top + height / 2)) / (height / 2);
-      
-      x.set(currentX);
-      y.set(currentY);
+    const checkTouch = () => {
+      setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
     };
+    checkTouch();
 
-    const container = stageRef.current;
-    if (container) {
-      container.addEventListener('mousemove', handleMove);
+    if (isTouchDevice) {
+      // Programmatic ambient wave for mobile interaction representation
+      let time = 0;
+      const interval = setInterval(() => {
+        time += 0.015;
+        x.set(Math.sin(time) * 0.2);
+        y.set(Math.cos(time * 1.2) * 0.15);
+      }, 16);
+      return () => clearInterval(interval);
+    } else {
+      const handleMove = (e: MouseEvent) => {
+        if (!stageRef.current) return;
+        const { left, top, width, height } = stageRef.current.getBoundingClientRect();
+        x.set((e.clientX - (left + width / 2)) / (width / 2));
+        y.set((e.clientY - (top + height / 2)) / (height / 2));
+      };
+
+      const container = stageRef.current;
+      if (container) container.addEventListener('mousemove', handleMove);
+      return () => {
+        if (container) container.removeEventListener('mousemove', handleMove);
+      };
     }
-    return () => {
-      if (container) container.removeEventListener('mousemove', handleMove);
-    };
-  }, [x, y]);
+  }, [x, y, isTouchDevice]);
 
   return (
     <section 
       ref={stageRef}
-      className="max-w-[1600px] mx-auto px-6 py-32 border-b border-brand-graphite/10 relative overflow-hidden flex flex-col items-center justify-center min-h-[90vh] bg-[#EAEAEA]/30 cursor-none"
+      className="max-w-[1600px] mx-auto px-6 py-20 md:py-32 border-b border-brand-graphite/10 relative overflow-hidden flex flex-col items-center justify-center min-h-[70vh] md:min-h-[90vh] bg-[#EAEAEA]/30 md:cursor-none"
     >
       {/* Background Subtle Spatial Reference Grid */}
       <div className="absolute inset-0 pointer-events-none grid grid-cols-4 grid-rows-4 border-x border-brand-graphite/5">
@@ -92,6 +104,11 @@ export default function ProductFeatureStage() {
             </div>
           )}
 
+          {/* Touch-safe interaction indicator */}
+          <div className="absolute bottom-4 left-4 bg-brand-graphite text-brand-offwhite px-3 py-1.5 text-[8px] uppercase tracking-widest font-mono md:hidden">
+            View System →
+          </div>
+
           {/* Dynamic Follow-Cursor Context Label */}
           <motion.div 
             style={{ x: imgX, y: imgY }}
@@ -111,7 +128,7 @@ export default function ProductFeatureStage() {
           <span className="text-[10px] uppercase tracking-[0.3em] text-brand-gray font-mono block mb-2">
             Pinnacle Propulsion
           </span>
-          <h2 className="font-display text-4xl md:text-6xl lg:text-7xl uppercase tracking-tight leading-none text-brand-graphite">
+          <h2 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl uppercase tracking-tight leading-none text-brand-graphite wrap-break-word">
             {targetProduct.name}
           </h2>
         </div>
