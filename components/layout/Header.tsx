@@ -66,7 +66,7 @@ export default function Header() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-60 bg-[#F4F4F2] md:hidden flex flex-col pt-32 px-6"
+            className="fixed inset-0 z-60 bg-brand-offwhite md:hidden flex flex-col pt-32 px-6"
           >
             <button 
               onClick={() => setIsMenuOpen(false)}
