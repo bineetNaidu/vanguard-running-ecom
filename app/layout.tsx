@@ -3,6 +3,7 @@ import { Inter, EB_Garamond } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import CartDrawer from '@/components/cart/CartDrawer';
 
 // Technical Sans-Serif
 const inter = Inter({
@@ -32,8 +33,9 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${garamond.variable}`}>
       <body className="flex flex-col min-h-screen">
         <Header />
+        <CartDrawer />
         {/* pt-20 accounts for the fixed header */}
-        <main className="flex-grow pt-20">
+        <main className="grow pt-20">
           {children}
         </main>
         <Footer />

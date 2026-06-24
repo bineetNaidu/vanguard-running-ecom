@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Product } from '@/types/product';
 import { transitionSpring, transitionEase } from '@/lib/motion';
+import { useState } from 'react';
+import { useCartStore } from '@/stores/cart-store';
 
 interface ProductDetailViewProps {
   product: Product;
@@ -11,6 +13,14 @@ interface ProductDetailViewProps {
 
 export default function ProductDetailView({ product }: ProductDetailViewProps) {
   const primaryImage = product.images[0];
+  const { addItem, openCart } = useCartStore();
+
+  const [selectedSize] = useState('M');
+
+  const handleAddToSystem = () => {
+    addItem(product, selectedSize);
+    openCart();
+  };
 
   // Controlled, engineered entrance for text elements that do not morph
   const fadeUpVariants = {
@@ -110,9 +120,9 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
               </ul>
             </motion.div>
 
-            {/* Action Matrix (Cart logic wired in Step 8) */}
+            {/* Action Matrix */}
             <motion.div variants={fadeUpVariants} className="pt-8">
-              <button className="w-full bg-brand-graphite text-brand-offwhite py-5 text-[11px] uppercase tracking-[0.2em] font-medium hover:bg-brand-graphite/80 transition-colors duration-300">
+              <button onClick={handleAddToSystem} className="w-full bg-brand-graphite text-brand-offwhite py-5 text-[11px] uppercase tracking-[0.2em] font-medium hover:bg-brand-graphite/80 transition-colors duration-300">
                 Add to System — ${product.price}
               </button>
             </motion.div>
