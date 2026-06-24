@@ -67,9 +67,7 @@ export default function SplitScreenLookbook() {
         <div className="w-full lg:w-2/3 flex flex-col gap-8 md:gap-16">
           {lookbookItems.map((item, index) => {
             const prod = item.product!;
-            const displayImage = item.overrideImage || prod.images[0]?.url;
-
-            console.log({prod})
+            const displayImage = prod.images[0]?.url;
 
             return (
               <motion.div 
@@ -90,6 +88,7 @@ export default function SplitScreenLookbook() {
                     src={displayImage} 
                     alt={prod.name}
                     fill
+                    sizes="(max-width: 768px) 100vw, 66vw"
                     className="object-cover transition-transform duration-1000 group-hover:scale-105"
                   />
                 ) : (
@@ -101,10 +100,11 @@ export default function SplitScreenLookbook() {
                 )}
 
                 {/* Overlay gradient for text legibility */}
-                <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/60 pointer-events-none" />
+                {/* FIX 3: Ensure standard Tailwind gradient syntax is used */}
+                <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/80 pointer-events-none z-10" />
 
                 {/* Editorial Overlay */}
-                <div className="absolute inset-0 flex flex-col justify-between p-8 pointer-events-none z-10 text-brand-offwhite">
+                <div className="absolute inset-0 flex flex-col justify-between p-8 pointer-events-none z-20 text-brand-offwhite">
                   <div className="flex justify-between items-start">
                     <span className="text-[10px] uppercase tracking-[0.3em] bg-black/20 backdrop-blur-md px-3 py-1">
                       {item.theme}
