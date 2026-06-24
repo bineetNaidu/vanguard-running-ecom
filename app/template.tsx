@@ -1,21 +1,17 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { transitionEase } from '@/lib/motion';
 
 export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
-      // We initialize with a very subtle fade and shift.
-      // This prevents abrupt page snapping and gives the layoutId
-      // morphing transition a smooth canvas to execute upon.
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 12, filter: 'blur(4px)' }}
+      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
       transition={{ 
-        duration: 0.7, 
-        ease: transitionEase 
+        duration: 0.6, 
+        ease: [0.22, 1, 0.36, 1], // Custom engineered deceleration
       }}
-      className="w-full h-full flex flex-col grow"
+      className="w-full h-full"
     >
       {children}
     </motion.div>

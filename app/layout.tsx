@@ -4,6 +4,7 @@ import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import CartDrawer from '@/components/cart/CartDrawer';
+import SystemBootSequence from '@/components/layout/SystemBootSequence';
 
 // Technical Sans-Serif
 const inter = Inter({
@@ -31,7 +32,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${garamond.variable}`}>
-      <body className="flex flex-col min-h-screen">
+      <body className="font-sans bg-brand-offwhite text-brand-graphite antialiased selection:bg-brand-graphite selection:text-brand-offwhite">
+        <SystemBootSequence />
         <Header />
         <CartDrawer />
         {/* pt-20 accounts for the fixed header */}
