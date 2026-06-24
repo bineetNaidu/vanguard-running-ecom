@@ -1,9 +1,9 @@
 // Centralized motion physics to ensure consistency across the application.
 // "Deliberate and Engineered" means zero bouncy defaults.
 
-import { Easing } from "framer-motion";
+import { Easing, Transition } from "framer-motion";
 
-export const transitionSpring = {
+export const transitionSpring: Transition = {
     type: 'spring',
     stiffness: 200,
     damping: 30,
