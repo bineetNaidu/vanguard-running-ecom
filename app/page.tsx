@@ -1,13 +1,18 @@
-// A temporary clean slate to overwrite Next.js default boilerplate until Step 6
+import CinematicHero from '@/components/home/CinematicHero';
+import VelocityMarquee from '@/components/home/VelocityMarquee';
+import SplitScreenLookbook from '@/components/home/SplitScreenLookbook';
+
 export default function Home() {
   return (
-    <div className="min-h-[80vh] flex flex-col items-center justify-center text-center px-6">
-      <h1 className="font-display text-5xl md:text-7xl uppercase mb-6">
-        Vanguard Systems
-      </h1>
-      <p className="text-sm uppercase tracking-[0.2em] text-brand-gray">
-        Aesthetic Performance Engineering
-      </p>
-    </div>
+    <>
+      <CinematicHero />
+      
+      {/* Negative scroll velocity moves left, positive moves right.
+        Base velocity sets the idle drift speed.
+      */}
+      <VelocityMarquee text="Vanguard Running Systems — Maximum Kinetic Return — " baseVelocity={-2} />
+      
+      <SplitScreenLookbook />
+    </>
   );
 }
