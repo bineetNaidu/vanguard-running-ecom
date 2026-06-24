@@ -11,8 +11,7 @@ export const products: Product[] = [
     description: 'Engineered for maximum energy return and structural stability. The VXR-01 features a full-length carbon geometry specifically tuned for daily mileage and high-output efforts.',
     features: ['Tuned Carbon Geometry', 'Adaptive Foam Midsole', 'Seamless Monomesh Upper', 'Precision Heel Lock'],
     images: [
-      { url: '/placeholders/footwear-1-a.jpg', alt: '[ PRODUCT IMAGE PLACEHOLDER ] - VXR-01 Carbon Trainer Lateral View', isPlaceholder: true },
-      { url: '/placeholders/footwear-1-b.jpg', alt: '[ PRODUCT IMAGE PLACEHOLDER ] - VXR-01 Carbon Trainer Top View', isPlaceholder: true }
+      { url: '/assets/vxr-01-carbon-trainer.jpg', alt: 'VXR-01 Carbon Trainer Lateral View', isPlaceholder: false },
     ]
   },
   {
@@ -24,7 +23,7 @@ export const products: Product[] = [
     description: 'A stripped-down, ultralight racing platform. Removing all non-essential material, the VXR-02 provides raw biomechanical efficiency for race-day performance.',
     features: ['Ultralight Construction', 'Aggressive Rocker Profile', 'Micro-perforated Upper', 'High-Traction Outsole System'],
     images: [
-      { url: '/placeholders/footwear-2-a.jpg', alt: '[ INSERT AI ART HERE ] - VXR-02 Race System Studio', isPlaceholder: true }
+      { url: '/assets/vxr-02-race-system.jpg', alt: 'VXR-02 Race System Studio', isPlaceholder: false }
     ]
   },
   {
@@ -36,7 +35,7 @@ export const products: Product[] = [
     description: 'Calculated cushioning for long-range engagements. The VXR-03 manages impact attenuation without sacrificing the firm, responsive feel required by elite athletes.',
     features: ['Maximized Volume Midsole', 'Expanded Toe Box', 'Integrated Arch Support', 'Breathable Knit Composite'],
     images: [
-      { url: '/placeholders/footwear-3-a.jpg', alt: '[ PRODUCT IMAGE PLACEHOLDER ] - VXR-03 Distance Platform', isPlaceholder: true }
+      { url: '/assets/vxr-03-distance-platform.jpg', alt: 'VXR-03 Distance Platform', isPlaceholder: false }
     ]
   },
   {
@@ -48,7 +47,7 @@ export const products: Product[] = [
     description: 'Our pinnacle velocity engine. Dual-plated geometry meets our most reactive compound yet, creating a propulsive experience that defies conventional physics.',
     features: ['Dual-Plate Geometry', 'Reactive Foam Compound', 'Aerodynamic Profile', 'Race-Fit Lacing System'],
     images: [
-      { url: '/placeholders/footwear-4-a.jpg', alt: '[ INSERT AI ART HERE ] - VXR-04 Velocity Elite Lateral', isPlaceholder: true }
+      { url: '/assets/vxr-04-velocity-elite.jpg', alt: 'VXR-04 Velocity Elite Lateral', isPlaceholder: false }
     ]
   },
 
@@ -62,7 +61,7 @@ export const products: Product[] = [
     description: 'Next-to-skin baseline engineering. Zonal compression mapping supports core muscle groups while managing thermal output during threshold efforts.',
     features: ['Zonal Compression Mapping', 'Thermal Regulation', 'Anti-Odor Treatment', 'Seamless Articulation'],
     images: [
-      { url: '/placeholders/apparel-1-a.jpg', alt: '[ PRODUCT IMAGE PLACEHOLDER ] - Flux Compression Tee Front', isPlaceholder: true }
+      { url: '/assets/flux-compression-tee.jpg', alt: 'Flux Compression Tee Front', isPlaceholder: false }
     ]
   },
   {
@@ -74,7 +73,7 @@ export const products: Product[] = [
     description: 'Near-weightless coverage. The Vector Singlet utilizes a hydrophobic laser-cut mesh that refuses to hold moisture, staying light from start to finish.',
     features: ['Hydrophobic Mesh', 'Laser-Cut Ventilation', 'Bonded Seams', 'Ultralight Weight'],
     images: [
-      { url: '/placeholders/apparel-2-a.jpg', alt: '[ INSERT AI ART HERE ] - Vector Race Singlet', isPlaceholder: true }
+      { url: '/assets/vector-race-singlet.jpg', alt: 'Vector Race Singlet', isPlaceholder: false }
     ]
   },
   {
@@ -86,7 +85,10 @@ export const products: Product[] = [
     description: 'Absolute elemental protection. An engineered 3-layer membrane that completely blocks wind and precipitation while allowing extreme internal vapor transmission.',
     features: ['3-Layer Waterproof Membrane', 'Articulated Hood', 'Packable Design', 'Reflective Accents'],
     images: [
-      { url: '/placeholders/apparel-3-a.jpg', alt: '[ PRODUCT IMAGE PLACEHOLDER ] - Atmos Shell Jacket', isPlaceholder: true }
+      { url: '/assets/atmos-shell-jacket-a.jpg', alt: 'Atmos Shell Jacket', isPlaceholder: false },
+      { url: '/assets/atmos-shell-jacket-b.jpg', alt: 'Atmos Shell Jacket model 1', isPlaceholder: false },
+      { url: '/assets/atmos-shell-jacket-c.jpg', alt: 'Atmos Shell Jacket model 2', isPlaceholder: false },
+      { url: '/assets/atmos-shell-jacket-d.jpg', alt: 'Atmos Shell Jacket model 3', isPlaceholder: false },
     ]
   },
   {
