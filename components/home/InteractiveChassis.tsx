@@ -1,11 +1,13 @@
 'use client';
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import TechNode from './TechNode';
+import Image from 'next/image';
 
 export default function InteractiveChassis() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [imgError, setImgError] = useState(false);
   
   // Raw mouse coordinates normalized from -1 to 1
   const rawX = useMotionValue(0);
@@ -55,11 +57,22 @@ export default function InteractiveChassis() {
         className="relative w-full max-w-2xl aspect-square md:aspect-video flex items-center justify-center"
       >
         
-        {/* The Product Graphic / AI Placeholder */}
-        <div className="relative w-3/4 h-3/4 bg-[#EAEAEA] border border-brand-graphite/10 flex items-center justify-center shadow-2xl transition-transform duration-700">
-           <span className="text-[10px] uppercase tracking-[0.3em] text-brand-graphite/40 font-medium">
-              [ INSERT HI-RES CHASSIS PNG ]
-           </span>
+       {/* The Product Graphic Frame */}
+       <div className="relative w-full h-full bg-[#EAEAEA] border border-brand-graphite/10 flex items-center justify-center shadow-2xl overflow-hidden group">
+          {!imgError ? (
+            <Image
+              src="/assets/chassis.jpg"
+              alt="Vanguard Performance Chassis VXR"
+              fill
+              className="object-cover p-0 scale-100 group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+              priority
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <span className="text-[10px] uppercase tracking-[0.3em] text-brand-graphite/40 font-medium px-4 text-center">
+              [ ASSET DISCONNECTED: PLACE CHASSIS.PNG IN /PUBLIC ]
+            </span>
+          )}
         </div>
 
         {/* Technical Data Nodes */}
